@@ -9,7 +9,6 @@ private enum class ParamState {
     none,
     born,
     fileIn,
-    fileOut,
     divisionBy
 }
 
@@ -42,12 +41,10 @@ fun main(args: Array<String>) {
                 fileIn = arg
                 state = ParamState.none
             }
-            ParamState.fileOut -> {
-                state = ParamState.none
-            }
             ParamState.born -> {
                 born = Calendar.getInstance()
                 born.time = DateFormat.getDateInstance().parse(arg)
+                state = ParamState.none
             }
             ParamState.divisionBy -> {
                 divisionBy = try {
@@ -59,6 +56,7 @@ fun main(args: Array<String>) {
                     System.err.println("The divisionBy parameter has to be a postive integer.")
                     return
                 }
+                state = ParamState.none
             }
         }
     } catch (pe: ParseException) {
@@ -112,7 +110,7 @@ fun main(args: Array<String>) {
 }
 
 private fun readInputFile(filename: String) : List<String>  {
-    return Files.readAllLines(File(filename).toPath())
+    return File(filename).readLines()
 }
 
 private fun toDigits(num: Int, minDigits: Int = 0): ByteArray {
@@ -136,5 +134,5 @@ private fun printHelp() {
             "options can contain the following:\n" +
             "\t(-b | --born) <birthday>\tEnter in your local format. " +
             "Will replace X in input by ddmmyyyy (each modulo 2). Defaults to 24.02.1998\n" +
-            "\t(-d | --divby) <d>\tWill test divisibility by d. Default to 5.\n")
+            "\t(-d | --divby) <d>\tWill test divisibility by d. Defaults to 5.\n")
 }

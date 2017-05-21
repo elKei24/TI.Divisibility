@@ -10,7 +10,7 @@ class BinaryDivisibilityDFA(val divisionBy : Int) {
     var rest = 0 //state R_0 at beginning
 
     init {
-        if (divisionBy <= 0) throw IllegalArgumentException("divisionBy be positive")
+        if (divisionBy <= 0) throw IllegalArgumentException("divisionBy must be positive")
     }
 
     fun read(symbol : Boolean) : Boolean {
