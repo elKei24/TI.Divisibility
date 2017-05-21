@@ -1,5 +1,4 @@
 import java.io.File
-import java.nio.file.Files
 import java.text.DateFormat
 import java.text.ParseException
 import java.util.*
@@ -15,7 +14,7 @@ private enum class ParamState {
 fun main(args: Array<String>) {
     var state = ParamState.none
     var born = Calendar.getInstance()
-    born.set(1998, 2, 24)
+    born.set(1998, Calendar.FEBRUARY, 24)
     var fileIn: String? = null
     var input: String? = null
     var divisionBy = 5
